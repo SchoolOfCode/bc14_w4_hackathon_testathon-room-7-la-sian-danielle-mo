@@ -29,7 +29,21 @@ test('webpage loads and add a task', async ({ page }) => {
 	const todo = page.locator('ul li');
 	// assert that list item now has text and date
 	await expect(todo).toHaveText('hello2023-04-06🗑️');
+	// select delete button
+	const deleteButton = page.getByRole('button', { name: '🗑️' });
+	// Action: Click on delete button
+	await deleteButton.click();
+	// Assert: 'hello' todo is removed from the list by confirming default todo summary text remains
+	// Select paragraph
+	//const todoSummary = page.locator('paragraph[id=summary]');
+	// Assert
+	//await expect(todoSummary).toHaveValue("😌 No todos found. Looks like you're up-to-date on everything...")
+	await expect(todoList).toBeEmpty();
 });
+
+
+
+
 
 // test('add a task', async ({ page }) => {
 // 	const url = 'http://localhost:3000';
